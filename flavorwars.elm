@@ -2,7 +2,14 @@
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 import Random
+import Random.List
 
+
+main :
+    Program
+        Never
+        Model
+        Msg
 
 main =
     Html.program
@@ -39,15 +46,26 @@ left_name = "LEFT"
 right_name : String
 right_name = "RIGHT"
 
+
+type alias Quote = 
+    { text:   String
+    , source: Selection
+    }
+
+all_quotes : List Quote
+all_quotes = List.map (\q -> { text = q, source = Left }) left_quotes
+    ++ List.map (\q -> { text = q, source = Right}) right_quotes
+
+
+
 -- MODEL
 
 type alias Model = 
     { total:   Int
     , correct: Int
     , remain:  Int
-    , l_pool:  List String
-    , r_pool:  List String
-    , quote:   Maybe String
+    , queue:   List Quote
+    , current: Quote
     , answer:  Maybe Selection
     , previous:Maybe Result
     }
@@ -58,19 +76,20 @@ init =
     (
         { total   = 0
         , correct = 0 
-        , remain  = num_questions
-        , l_pool  = left_quotes
-        , r_pool  = right_quotes
-        , quote   = Nothing
+        , remain  = min num_questions (List.length all_quotes)
+        , queue   = all_quotes
+        , current = { text = "", source = Left }
         , answer  = Nothing
         , previous= Nothing
         }
-        , Random.generate NewPrompt Random.bool
+        , Random.generate Setup (Random.List.shuffle all_quotes)
     )
+
+
 
 -- UPDATE
 
-type Msg = Guess Selection | Reset | NewPrompt Bool
+type Msg = Guess Selection | Reset | Setup (List Quote)
 
 update2 : Msg -> Model -> Model
 update2 msg model = 
@@ -82,48 +101,45 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model = 
     case msg of 
         Guess guess -> 
-            if Just guess == model.answer then
-                (   { model
-                    | total   = model.total + 1
-                    , remain  = model.remain - 1
-                    , correct = model.correct + 1
-                    , previous= Just Correct
-                    }
-                    , Random.generate NewPrompt Random.bool
-                    )
-            else
-                (   { model
-                    | total   = model.total + 1
-                    , remain  = model.remain - 1
-                    , previous= Just Incorrect
-                    }
-                    , Random.generate NewPrompt Random.bool
-                    )
+            case model.queue of 
+                [] -> 
+                    init
+                next :: rest -> 
+                    if Just guess == model.answer then
+                        (   { model
+                            | total   = model.total + 1
+                            , remain  = model.remain - 1
+                            , correct = model.correct + 1
+                            , previous= Just Correct
+                            , current = next
+                            , queue   = rest
+                            }
+                            , Cmd.none
+                            )
+                    else
+                        (   { model
+                            | total   = model.total + 1
+                            , remain  = model.remain - 1
+                            , previous= Just Incorrect
+                            , current = next
+                            , queue   = rest
+                            }
+                            , Cmd.none
+                            )
+        Setup quotes -> 
+            case quotes of 
+                [] -> (model, Cmd.none)
+                first :: rest -> 
+                    (   { model
+                        | current = first
+                        , queue   = rest
+                        }
+                        , Cmd.none
+                        )
         Reset -> 
             init 
-        NewPrompt next -> 
-            if next then
-                case model.l_pool of
-                    [] -> init  -- should never happen
-                    l_quote :: l_rest -> 
-                        (   { model
-                            | quote  = Just l_quote
-                            , answer = Just Left
-                            , l_pool = l_rest
-                            }
-                            , Cmd.none
-                            )
-            else 
-                case model.r_pool of
-                    [] -> init  -- should never happen
-                    r_quote :: r_rest ->
-                        (   { model
-                            | quote  = Just r_quote
-                            , answer = Just Right
-                            , r_pool = r_rest
-                            }
-                            , Cmd.none
-                            )
+
+
 
 
 -- SUBSCRIPTIONS
@@ -132,6 +148,7 @@ update msg model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
+
 
 
 -- VIEW
@@ -145,7 +162,7 @@ view model =
         Nothing -> ""
         Just Incorrect -> "Wrong"
         Just Correct -> "Correct") ]
-    , div [] [ text ("Who said it? '" ++ toString model.quote ++ "'") ]
+    , div [] [ text ("Who said it? '" ++ toString model.current.text ++ "'") ]
     , div [] [ text (toString model) ]
     , button [ onClick (Guess Right)] [ text right_name ]
     , button [ onClick Reset ] [ text "Reset" ]
