@@ -135,10 +135,6 @@ init =
 
 type Msg = Guess Selection | Reset | Setup (List Quote)
 
-update2 : Msg -> Model -> Model
-update2 msg model = 
-    model
-
 
 update : Msg -> Model -> (Model, Cmd Msg)
 
@@ -201,9 +197,6 @@ subscriptions model =
 
 -- VIEW
 
-image_src : String
-image_src = "https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png"
-
 view : Model -> Html Msg
 view model =
   div [ (align "center"), (height 100) ]
@@ -211,7 +204,8 @@ view model =
         [ Html.h1 [] [ text "Who said it?" ]
         , Html.h2 [] [ text "Guy Fieri or Alex Jones?" ]
         , Html.img 
-            [ src image_src
+            [ src "https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png"
+            , alt "Credit to https://itszn.com"
             , style [("width", "50%")]
             ] 
         []
