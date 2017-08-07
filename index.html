@@ -9388,14 +9388,9 @@ var _elm_lang$html$Html_Events$Options = F2(
 	function (a, b) {
 		return {stopPropagation: a, preventDefault: b};
 	});
-var _stensonowen$flavorwars$Main$image_src = 'https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png';
 var _stensonowen$flavorwars$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
-var _stensonowen$flavorwars$Main$update2 = F2(
-	function (msg, model) {
-		return model;
-	});
 var _stensonowen$flavorwars$Main$right_name = 'Guy Fieri';
 var _stensonowen$flavorwars$Main$left_name = 'Alex Jones';
 var _stensonowen$flavorwars$Main$num_questions = 10;
@@ -9728,16 +9723,20 @@ var _stensonowen$flavorwars$Main$view = function (model) {
 							_elm_lang$html$Html$img,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src(_stensonowen$flavorwars$Main$image_src),
+								_0: _elm_lang$html$Html_Attributes$src('https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$style(
-										{
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
+									_0: _elm_lang$html$Html_Attributes$alt('Credit to https://itszn.com'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}
 							},
 							{ctor: '[]'}),
