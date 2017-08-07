@@ -1,5 +1,6 @@
 
-import Html exposing (Html, button, div, text)
+import Html exposing (Html, Attribute, button, div, text)
+import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Random
 import Random.List
@@ -41,10 +42,10 @@ num_questions : Int
 num_questions = 10
 
 left_name : String
-left_name = "LEFT"
+left_name = "Alex Jones"
 
 right_name : String
-right_name = "RIGHT"
+right_name = "Guy Fieri"
 
 
 type alias Quote = 
@@ -65,8 +66,7 @@ type alias Model =
     , correct: Int
     , remain:  Int
     , queue:   List Quote
-    , current: Quote
-    , answer:  Maybe Selection
+    , current: Maybe Quote
     , previous:Maybe Result
     }
 
@@ -76,10 +76,9 @@ init =
     (
         { total   = 0
         , correct = 0 
-        , remain  = min num_questions (List.length all_quotes)
+        , remain  = (Basics.min num_questions (List.length all_quotes))
         , queue   = all_quotes
-        , current = { text = "", source = Left }
-        , answer  = Nothing
+        , current = Nothing
         , previous= Nothing
         }
         , Random.generate Setup (Random.List.shuffle all_quotes)
@@ -101,37 +100,41 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model = 
     case msg of 
         Guess guess -> 
-            case model.queue of 
-                [] -> 
-                    init
-                next :: rest -> 
-                    if Just guess == model.answer then
-                        (   { model
-                            | total   = model.total + 1
-                            , remain  = model.remain - 1
-                            , correct = model.correct + 1
-                            , previous= Just Correct
-                            , current = next
-                            , queue   = rest
-                            }
-                            , Cmd.none
-                            )
-                    else
-                        (   { model
-                            | total   = model.total + 1
-                            , remain  = model.remain - 1
-                            , previous= Just Incorrect
-                            , current = next
-                            , queue   = rest
-                            }
-                            , Cmd.none
-                            )
+            let queue = case model.queue of
+                _ :: tail -> tail
+                [] -> []
+            in
+                case model.current of 
+                    Just current -> 
+                        if guess == current.source then
+                            (   { model
+                                | total   = model.total + 1
+                                , remain  = model.remain - 1
+                                , correct = model.correct + 1
+                                , previous= Just Correct
+                                , current = List.head model.queue
+                                , queue   = queue
+                                }
+                                , Cmd.none
+                                )
+                        else
+                            (   { model
+                                | total   = model.total + 1
+                                , remain  = model.remain - 1
+                                , previous= Just Incorrect
+                                , current = List.head model.queue
+                                , queue   = queue
+                                }
+                                , Cmd.none
+                                )
+                    _ -> 
+                        init
         Setup quotes -> 
             case quotes of 
                 [] -> (model, Cmd.none)
                 first :: rest -> 
                     (   { model
-                        | current = first
+                        | current = Just first
                         , queue   = rest
                         }
                         , Cmd.none
@@ -153,19 +156,66 @@ subscriptions model =
 
 -- VIEW
 
+imgStyle : Attribute msg
+imgStyle = 
+    style
+        [ ("height", "10") 
+        , ("text-align", "center")
+        ]
+
+image_src : String
+image_src = "https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png"
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ button [ onClick (Guess Left)] [ text left_name ]
-    , div [] [ text (case model.previous of
-        Nothing -> ""
-        Just Incorrect -> "Wrong"
-        Just Correct -> "Correct") ]
-    , div [] [ text ("Who said it? '" ++ toString model.current.text ++ "'") ]
-    , div [] [ text (toString model) ]
-    , button [ onClick (Guess Right)] [ text right_name ]
-    , button [ onClick Reset ] [ text "Reset" ]
+  div [ (align "center"), (height 100) ]
+    ( 
+        [ Html.img [ src image_src
+        , style [("width", "65%")]
+        ] []
+        ]
+      ++
+    [
+    let 
+        (color, message) = 
+            case model.previous of 
+                Nothing -> ("white", " ")
+                Just Incorrect -> ("red", "Wrong")
+                Just Correct -> ("green", "Correct")
+    in 
+          div [ style [("color", color)] ] [ text message ]
+    ] 
+    ++ 
+    case model.current of 
+        Just quote -> 
+            [ div [] [ text (toString quote.text) ] 
+            , button [ onClick (Guess Left)] [ text left_name ]
+            , button [ onClick (Guess Right)] [ text right_name ]
+            ]
+        Nothing ->
+            [ div [] [ text ("You got " ++ toString(model.correct) ++ " right out of " ++ toString(model.total)) ] ]
+    ++
+    [ div [] []
+    , button [ onClick Reset ] [ text "Start over" ]
     ]
+    ++
+    [ Html.footer [] [ text "foooooooo" ] ]
+    )
 
 
+{-
+imageStyle : Attribute msg
+imageStyle = 
+    style
+        [ ("height", "10") 
+        , ("text-align", "center")
+        ]
+-}
+  {-
+    [ ("width", "100%")
+    , ("height", "40px")
+    , ("padding", "10px 0")
+    , ("font-size", "2em")
+    , ("text-align", "center")
+    ]
+  -}
