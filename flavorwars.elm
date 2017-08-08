@@ -197,45 +197,60 @@ subscriptions model =
 
 -- VIEW
 
+{-
+copyright 2017, /u/itszn
+<itszn>     https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png
+<itszn>     Do you think god stays in heaven becase he, too, lives in fear of what he's created here on earth?
+<itszn>     That was a waste of an hour
+...
+<itszn>     I realized that their heads are the same shape
+<itszn>     So decided to make this
+<qjkxkcd>   I think the rest of them might be the same shape too
+<itszn>     pretty much
+-}
+
 view : Model -> Html Msg
 view model =
-  div [ (align "center"), (height 100) ]
-    ( 
-        [ Html.h1 [] [ text "Who said it?" ]
-        , Html.h2 [] [ text "Guy Fieri or Alex Jones?" ]
-        , Html.img 
-            [ src "https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png"
-            , alt "Credit to https://itszn.com"
+    Html.section [ class "body" ] [
+        div [ align "center" ] ( 
+            [ Html.h1 [] [ text "Who said it?" ]
+            , Html.h2 [] [ text "Guy Fieri or Alex Jones?" ]
+            , Html.img 
+            [ src "money_shot.png" 
+            , alt "<itszn> Do you think god stays in heaven becase he, too, lives in fear of what he's created here on earth?"
             , style [("width", "50%")]
             ] 
-        []
-        ]
-      ++
-    [
-    let 
-        (color, message) = 
-            case model.previous of 
-                Nothing -> ("white", " ")
-                Just Incorrect -> ("red", "Wrong")
-                Just Correct -> ("green", "Correct")
-    in 
-          div [ style [("color", color)] ] [ text message ]
-    ] 
-    ++ 
-    if model.remain > 0 then
-        case model.current of 
-            Just quote -> 
-                [ div [ style [("width", "50%")]  ] [ text ("\"" ++ quote.text ++ "\"") ] 
-                , button [ onClick (Guess Left)] [ text left_name ]
-                , Html.span [] [ text " or " ]
-                , button [ onClick (Guess Right)] [ text right_name ]
-                ]
-            Nothing ->
+            []
+            ]
+            ++
+            [
+                let 
+                    (color, message) = 
+                        case model.previous of 
+                            Nothing -> ("white", " ")
+                            Just Incorrect -> ("red", "Wrong")
+                            Just Correct -> ("green", "Correct")
+                in 
+                    div [ style [("color", color)] ] [ text message ]
+            ] 
+            ++ 
+            if model.remain > 0 then
+                case model.current of 
+                    Just quote -> 
+                        [ div [ style [("width", "50%")]  ] [ text ("\"" ++ quote.text ++ "\"") ] 
+                        , button [ onClick (Guess Left)] [ text left_name ]
+                        , Html.span [] [ text " or " ]
+                        , button [ onClick (Guess Right)] [ text right_name ]
+                        ]
+                    Nothing ->
+                        [ div [] [ text ("You got " ++ toString(model.correct) ++ " right out of " ++ toString(model.total)) ] ]
+            else
                 [ div [] [ text ("You got " ++ toString(model.correct) ++ " right out of " ++ toString(model.total)) ] ]
-    else
-        [ div [] [ text ("You got " ++ toString(model.correct) ++ " right out of " ++ toString(model.total)) ] ]
-    ++
-    [ div [] []
-    , button [ onClick Reset ] [ text "Start over" ]
+                ++
+                [ div [] []
+                , button [ onClick Reset ] [ text "Start over" ]
+                ]
+        )
     ]
-    )
+
+
