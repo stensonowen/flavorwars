@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>sorry</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
@@ -9685,154 +9685,134 @@ var _stensonowen$flavorwars$Main$Guess = function (a) {
 };
 var _stensonowen$flavorwars$Main$view = function (model) {
 	return A2(
-		_elm_lang$html$Html$div,
+		_elm_lang$html$Html$section,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$align('center'),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$height(100),
-				_1: {ctor: '[]'}
-			}
+			_0: _elm_lang$html$Html_Attributes$class('body'),
+			_1: {ctor: '[]'}
 		},
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$h1,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Who said it?'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$h2,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Guy Fieri or Alex Jones?'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src('https://itszn.com/u/b9d7e94f67b47d813eb91d2af92bc177f1d5608a.png'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$alt('Credit to https://itszn.com'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$style(
-											{
-												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			A2(
-				_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: function () {
-						var _p4 = function () {
-							var _p5 = model.previous;
-							if (_p5.ctor === 'Nothing') {
-								return {ctor: '_Tuple2', _0: 'white', _1: ' '};
-							} else {
-								if (_p5._0.ctor === 'Incorrect') {
-									return {ctor: '_Tuple2', _0: 'red', _1: 'Wrong'};
-								} else {
-									return {ctor: '_Tuple2', _0: 'green', _1: 'Correct'};
-								}
-							}
-						}();
-						var color = _p4._0;
-						var message = _p4._1;
-						return A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$style(
-									{
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'color', _1: color},
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(message),
-								_1: {ctor: '[]'}
-							});
-					}(),
+					_0: _elm_lang$html$Html_Attributes$align('center'),
 					_1: {ctor: '[]'}
 				},
-				function () {
-					if (_elm_lang$core$Native_Utils.cmp(model.remain, 0) > 0) {
-						var _p6 = model.current;
-						if (_p6.ctor === 'Just') {
-							return {
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h1,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Who said it?'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h2,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Guy Fieri or Alex Jones?'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
 								ctor: '::',
 								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src('money_shot.png'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$alt('<itszn> Do you think god stays in heaven becase he, too, lives in fear of what he\'s created here on earth?'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(
+													{
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
+							ctor: '::',
+							_0: function () {
+								var _p4 = function () {
+									var _p5 = model.previous;
+									if (_p5.ctor === 'Nothing') {
+										return {ctor: '_Tuple2', _0: 'white', _1: ' '};
+									} else {
+										if (_p5._0.ctor === 'Incorrect') {
+											return {ctor: '_Tuple2', _0: 'red', _1: 'Wrong'};
+										} else {
+											return {ctor: '_Tuple2', _0: 'green', _1: 'Correct'};
+										}
+									}
+								}();
+								var color = _p4._0;
+								var message = _p4._1;
+								return A2(
 									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$style(
 											{
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
+												_0: {ctor: '_Tuple2', _0: 'color', _1: color},
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'\"',
-												A2(_elm_lang$core$Basics_ops['++'], _p6._0.text, '\"'))),
+										_0: _elm_lang$html$Html$text(message),
 										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(
-												_stensonowen$flavorwars$Main$Guess(_stensonowen$flavorwars$Main$Left)),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(_stensonowen$flavorwars$Main$left_name),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
+									});
+							}(),
+							_1: {ctor: '[]'}
+						},
+						function () {
+							if (_elm_lang$core$Native_Utils.cmp(model.remain, 0) > 0) {
+								var _p6 = model.current;
+								if (_p6.ctor === 'Just') {
+									return {
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$span,
-											{ctor: '[]'},
+											_elm_lang$html$Html$div,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text(' or '),
+												_0: _elm_lang$html$Html_Attributes$style(
+													{
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'\"',
+														A2(_elm_lang$core$Basics_ops['++'], _p6._0.text, '\"'))),
 												_1: {ctor: '[]'}
 											}),
 										_1: {
@@ -9842,93 +9822,120 @@ var _stensonowen$flavorwars$Main$view = function (model) {
 												{
 													ctor: '::',
 													_0: _elm_lang$html$Html_Events$onClick(
-														_stensonowen$flavorwars$Main$Guess(_stensonowen$flavorwars$Main$Right)),
+														_stensonowen$flavorwars$Main$Guess(_stensonowen$flavorwars$Main$Left)),
 													_1: {ctor: '[]'}
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text(_stensonowen$flavorwars$Main$right_name),
+													_0: _elm_lang$html$Html$text(_stensonowen$flavorwars$Main$left_name),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(' or '),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$button,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onClick(
+																_stensonowen$flavorwars$Main$Guess(_stensonowen$flavorwars$Main$Right)),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(_stensonowen$flavorwars$Main$right_name),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									};
+								} else {
+									return {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'You got ',
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															_elm_lang$core$Basics$toString(model.correct),
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																' right out of ',
+																_elm_lang$core$Basics$toString(model.total))))),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									};
+								}
+							} else {
+								return A2(
+									_elm_lang$core$Basics_ops['++'],
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'You got ',
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															_elm_lang$core$Basics$toString(model.correct),
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																' right out of ',
+																_elm_lang$core$Basics$toString(model.total))))),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$button,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_stensonowen$flavorwars$Main$Reset),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Start over'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
 										}
-									}
-								}
-							};
-						} else {
-							return {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'You got ',
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													_elm_lang$core$Basics$toString(model.correct),
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														' right out of ',
-														_elm_lang$core$Basics$toString(model.total))))),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							};
-						}
-					} else {
-						return A2(
-							_elm_lang$core$Basics_ops['++'],
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'You got ',
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													_elm_lang$core$Basics$toString(model.correct),
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														' right out of ',
-														_elm_lang$core$Basics$toString(model.total))))),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_stensonowen$flavorwars$Main$Reset),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Start over'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							});
-					}
-				}())));
+									});
+							}
+						}()))),
+			_1: {ctor: '[]'}
+		});
 };
 var _stensonowen$flavorwars$Main$main = _elm_lang$html$Html$program(
 	{init: _stensonowen$flavorwars$Main$init, view: _stensonowen$flavorwars$Main$view, update: _stensonowen$flavorwars$Main$update, subscriptions: _stensonowen$flavorwars$Main$subscriptions})();
